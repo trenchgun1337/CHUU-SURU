@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHUU SURU~</title>
+    <link rel="icon" href="assets/images/24c31b12283884072f476dde871276d8.jpg" type="image/jpeg">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { min-height: 100%; }
+
+        body {
+            background-image: url(assets/images/13b670f4862e228ea8ce1cccb6ea9912.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            font-size: 12px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ::selection { background: #fc6397; color: #6e0034; }
+        ::-webkit-scrollbar { width: 14px; height: 14px; }
+        ::-webkit-scrollbar-track { background: #490223; border-left: 2px solid #6e0034; }
+        ::-webkit-scrollbar-thumb { background: #fc6397; border: 2px solid #490223; border-radius: 7px; }
+        ::-webkit-scrollbar-thumb:hover { background: #e03b75; }
+
+        .page {
+            background-color: #ffffff;
+            border: 5px solid transparent;
+            border-image: linear-gradient(360deg, #e03b75 0%, #fc6397 50%, #ffd6ee 100%) 1;
+            max-width: 50%;
+            width: 50%;
+            margin: 0 auto;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 48px 32px;
+            box-shadow: #6e0034 7px 4px 0px;
+        }
+
+        .top-row {
+            display: flex;
+            width: 100%;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 36px;
+        }
+
+        .subtitle-circle {
+            width: 54px;
+            height: 214px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subtitle-circle span {
+            color: #ffffff;
+            font-size: 40px;
+            background: linear-gradient(360deg, #e03b75 0%, #fc6397 50%, #ffd6ee 100%);
+            border: 3.2px solid transparent;
+            border-image: linear-gradient(360deg, #e03b75 0%, #ffd6ee 100%) 1;
+        }
+
+        .title-block {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .title1 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1100%;
+            font-weight: bold;
+            line-height: 1;
+            margin-left: 12%;
+            width: 100%;
+            display: flex;
+            background: linear-gradient(360deg, #e03b75 0%, #fc6397 50%, #ffd6ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .desc1 { font-size: 18px; color: #6e0034; margin-top: -20px; }
+
+        .desc2 {
+            font-size: 34px;
+            background: linear-gradient(90deg, #e03b75 0%, #fc6397 50%, #ffd6ee 100%);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .kiss-image {
+            width: 100%;
+            max-width: 420px;
+            display: block;
+            margin-bottom: 28px;
+        }
+
+        .send-link {
+            color: #e87ca1;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-style: italic;
+            letter-spacing: 0.02em;
+        }
+        .send-link:hover { text-decoration: underline; }
+
+        .modal-bg {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-bg.open { display: flex; }
+
+        .modal {
+            background: #ffffff;
+            border: 3px solid #490223;
+            padding: 28px 32px;
+            max-width: 360px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            border-radius: 20px;
+        }
+
+        .modal h2 { font-size: 30px; font-weight: bold; color: #000; }
+
+        .modal input[type="email"] {
+            font-size: 14px;
+            padding: 8px 10px;
+            border: 1px solid #000;
+            outline: none;
+            width: 100%;
+            border-radius: 6px;
+        }
+
+        .modal-note { color: #6e0034; font-size: 11px; line-height: 1.35; }
+
+        .modal-send {
+            background: #e87ca1;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        .modal-send:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .modal-cancel {
+            background: none;
+            border: none;
+            font-size: 12px;
+            color: #000;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        hr { width: 60%; border: none; border-top: 3px solid #6e0034; margin: 24px 0; }
+
+        footer { padding: 6px 0; text-align: center; font-size: 12px; color: #680030; }
+        footer a { color: #ffffff; text-decoration: none; font-style: italic; }
+        footer a:hover { text-decoration: underline; }
+
+        /* ── gif picker ─────────────────────────────────── */
+        .gif-grid-wrap {
+            max-height: 260px;
+            overflow-y: auto;
+            border-radius: 8px;
+            background: #ffeaf4;
+        }
+        .gif-grid-wrap::-webkit-scrollbar { width: 10px; }
+        .gif-grid-wrap::-webkit-scrollbar-track { background: #490223; }
+        .gif-grid-wrap::-webkit-scrollbar-thumb { background: #fc6397; border-radius: 20; }
+
+        .gif-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            padding: 5px;
+        }
+
+        .gif-option {
+            border: 2.5px solid transparent;
+            border-radius: 7px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1;
+            background: #ffd6ee;
+            opacity: 0;
+            transform: scale(0.94);
+            animation: gifIn 200ms ease forwards;
+            transition: border-color 100ms ease, transform 120ms ease;
+        }
+        .gif-option:hover { transform: scale(1.04); }
+        .gif-option img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .gif-option.selected { border-color: #e03b75; }
+
+        @keyframes gifIn { to { opacity: 1; transform: scale(1); } }
+
+        .gif-status {
+            font-size: 11px;
+            color: #aaa;
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .gif-sentinel { grid-column: 1 / -1; height: 1px; }
+    </style>
+</head>
+
+<body>
+<div class="subtitle-circle" style="position:absolute;left:348px;top:85px;z-index:10;">
+    <span>&#12461;</span>
+    <span>&#12473;</span>
+    <span>&#12377;</span>
+    <span>&#12427;</span>
+</div>
+
+<div class="page">
+    <div class="top-row">
+        <div class="title-block">
+            <div class="title1">CHUU SURU~</div>
+        </div>
+    </div>
+    <div class="desc2">ever wanted to send a virtual kiss? anonymously? well...now you can!</div>
+    <br><br><br>
+    <hr>
+    <img src="assets/images/f1f93a4b55f37ca7107db3ba5ac1144b.jpg" alt="virtual kiss illustration" class="kiss-image">
+    <button class="send-link" onclick="openModal()">(send a CHUU SURU NOW!)</button>
+</div>
+
+<div class="modal-bg" id="modal-bg" onclick="handleBgClick(event)">
+    <div class="modal">
+        <h2>sending an anime kiss to:</h2>
+        <input type="email" id="recipient" placeholder="recipient's email...">
+
+        <div class="gif-grid-wrap" id="gif-grid-wrap">
+            <div class="gif-grid" id="gif-grid">
+                <p class="gif-status" id="gif-initial-msg">loading anime kiss GIFs...</p>
+            </div>
+        </div>
+
+        <button class="modal-send" id="send-btn" onclick="sendKiss()">send now</button>
+        <button class="modal-cancel" onclick="closeModal()">cancel</button>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 | Chuu Suru~ / Created by Settembre19th</p>
+     <a href="pages/contact.html">Contact</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+const GIPHY_KEY    = 'T9Bz2shtz9YJtPxZKbury5VXyFq3Ohf3';
+const EJS_KEY      = 'iww-r-sgJVyoRmokf';
+const EJS_SERVICE  = 'service_ina2cb8';
+const EJS_TEMPLATE = 'template_g7owumb';
+
+emailjs.init(EJS_KEY);
+
+// ── state ──────────────────────────────────────────────────────
+let selectedGif   = null;
+let gifOffset     = 0;
+let isLoading     = false;
+let exhausted     = false;
+let totalAvail    = Infinity;
+const seenIds     = new Set();
+const allowedUrls = new Set();
+let scrollObserver = null;
+
+// ── sentinel observer ──────────────────────────────────────────
+function attachSentinel() {
+    if (scrollObserver) scrollObserver.disconnect();
+
+    const sentinel = document.getElementById('gif-sentinel');
+    if (!sentinel) return;
+
+    scrollObserver = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) fetchGifs();
+    }, {
+        root: document.getElementById('gif-grid-wrap'),
+        rootMargin: '0px',
+        threshold: 0.1,
+    });
+
+    scrollObserver.observe(sentinel);
+}
+
+// ── fetch ──────────────────────────────────────────────────────
+async function fetchGifs() {
+    if (isLoading || exhausted) return;
+    isLoading = true;
+
+    const grid    = document.getElementById('gif-grid');
+    const isFirst = gifOffset === 0;
+
+    try {
+        const res  = await fetch(
+            `https://api.giphy.com/v1/gifs/search` +
+            `?api_key=${GIPHY_KEY}` +
+            `&q=${encodeURIComponent('anime kiss')}` +
+            `&limit=9&offset=${gifOffset}&rating=pg`
+        );
+        const { data, pagination } = await res.json();
+
+        totalAvail = pagination?.total_count ?? totalAvail;
+
+        // on first successful load, clear the placeholder
+        if (isFirst) grid.innerHTML = '';
+
+        // remove old sentinel before appending new cards
+        const old = document.getElementById('gif-sentinel');
+        if (old) old.remove();
+
+        // deduplicate across pages
+        const fresh = (data || []).filter(g => !seenIds.has(g.id));
+        fresh.forEach(g => seenIds.add(g.id));
+
+        fresh.forEach((gif, i) => {
+            const thumb = gif.images.fixed_width_small.url;
+            const full  = gif.images.original.url;
+            allowedUrls.add(full);
+
+            const div = document.createElement('div');
+            div.className = 'gif-option';
+            div.style.animationDelay = `${i * 28}ms`;
+            div.innerHTML = `<img src="${thumb}" alt="anime kiss gif" loading="lazy">`;
+
+            div.addEventListener('click', () => {
+                document.querySelectorAll('.gif-option').forEach(el => el.classList.remove('selected'));
+                div.classList.add('selected');
+                selectedGif = { thumb, full };
+            });
+
+            grid.appendChild(div);
+
+            // auto-select first gif ever loaded
+            if (!selectedGif) {
+                div.classList.add('selected');
+                selectedGif = { thumb, full };
+            }
+        });
+
+        gifOffset += 9;
+
+        if (gifOffset >= totalAvail || fresh.length === 0) {
+            exhausted = true;
+            const end = document.createElement('p');
+            end.className   = 'gif-status';
+            end.textContent = 'you have reached the end~';
+            grid.appendChild(end);
+            return;
+        }
+
+        // add new sentinel so the observer fires on the next scroll
+        const sentinel    = document.createElement('div');
+        sentinel.id        = 'gif-sentinel';
+        sentinel.className = 'gif-sentinel';
+        grid.appendChild(sentinel);
+        attachSentinel();
+
+    } catch (err) {
+        if (gifOffset === 0) {
+            grid.innerHTML = '<p class="gif-status" style="color:#e03b75;">error loading GIFs — try again later.</p>';
+        }
+        console.error(err);
+    } finally {
+        isLoading = false;
+    }
+}
+
+// ── modal ──────────────────────────────────────────────────────
+function openModal() {
+    document.getElementById('modal-bg').classList.add('open');
+    document.getElementById('recipient').focus();
+    // only kick off the first load once
+    if (gifOffset === 0 && !isLoading) fetchGifs();
+}
+
+function closeModal() {
+    document.getElementById('modal-bg').classList.remove('open');
+    document.getElementById('recipient').value = '';
+}
+
+function handleBgClick(e) {
+    if (e.target === document.getElementById('modal-bg')) closeModal();
+}
+
+// ── send ───────────────────────────────────────────────────────
+async function sendKiss() {
+    const to = document.getElementById('recipient').value.trim();
+
+    if (!to || !/\S+@\S+\.\S+/.test(to)) {
+        alert('please enter a valid email!');
+        return;
+    }
+    if (!selectedGif) {
+        alert('please select an anime kiss GIF!');
+        return;
+    }
+    if (!allowedUrls.has(selectedGif.full)) {
+        alert('only approved anime kiss GIFs can be sent!');
+        return;
+    }
+
+    const btn = document.getElementById('send-btn');
+    btn.textContent = 'sending...';
+    btn.disabled    = true;
+
+    try {
+        await emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
+            to_email: to,
+            gif_url:  selectedGif.full,
+            site_url: 'https://chuusuru.vercel.app',
+        });
+        alert('chuu suru sent! /^3^)/');
+        closeModal();
+    } catch (err) {
+        alert('send failed. please check the EmailJS settings.');
+        console.error(err);
+    } finally {
+        btn.textContent = 'send now';
+        btn.disabled    = false;
+    }
+}
+</script>
+</body>
+</html>
