@@ -251,16 +251,15 @@
 
 <div class="modal-bg" id="modal-bg" onclick="handleBgClick(event)">
     <div class="modal">
-        <h2>sending an anime kiss to:</h2>
         <input type="email" id="recipient" placeholder="recipient's email...">
 
         <div class="gif-grid-wrap" id="gif-grid-wrap">
             <div class="gif-grid" id="gif-grid">
-                <p class="gif-status" id="gif-initial-msg">loading anime kiss GIFs...</p>
+                <p class="gif-status" id="gif-initial-msg">loading GIFs...</p>
             </div>
         </div>
 
-        <p class="modal-note">the recipient won't know who sent this — the email comes from the site's server.</p>
+        <p class="modal-note">the recipient won't know who sent this — the email comes from the site's service email</p>
         <button class="modal-send" id="send-btn" onclick="sendKiss()">send now</button>
         <button class="modal-cancel" onclick="closeModal()">cancel</button>
     </div>
@@ -276,7 +275,7 @@
 <script>
 const GIPHY_KEY    = 'T9Bz2shtz9YJtPxZKbury5VXyFq3Ohf3';
 const EJS_KEY      = 'iww-r-sgJVyoRmokf';
-const EJS_SERVICE  = 'service_ina2cb8';
+const EJS_SERVICE  = 'service_bnwbygc';
 const EJS_TEMPLATE = 'template_2128nip';
 
 emailjs.init(EJS_KEY);
