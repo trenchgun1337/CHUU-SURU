@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHUU SURU~</title>
-    <link rel="icon" href="assets/images/24c31b12283884072f476dde871276d8.jpg" type="image/jpeg">
+    <link rel="icon" href="../assets/images/24c31b12283884072f476dde871276d8.jpg" type="image/x-icon">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         html { min-height: 100%; }
 
         body {
-            background-image: url(assets/images/13b670f4862e228ea8ce1cccb6ea9912.jpg);
+            background-image: url(../assets/images/13b670f4862e228ea8ce1cccb6ea9912.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -187,9 +187,9 @@
             border-radius: 8px;
             background: #ffeaf4;
         }
-        .gif-grid-wrap::-webkit-scrollbar { width: 10px; }
-        .gif-grid-wrap::-webkit-scrollbar-track { background: #490223; }
-        .gif-grid-wrap::-webkit-scrollbar-thumb { background: #fc6397; border-radius: 20; }
+        .gif-grid-wrap::-webkit-scrollbar { width: 5px; }
+        .gif-grid-wrap::-webkit-scrollbar-track { background: #ffeaf4; }
+        .gif-grid-wrap::-webkit-scrollbar-thumb { background: #fc6397; border-radius: 0; }
 
         .gif-grid {
             display: grid;
@@ -245,7 +245,7 @@
     <div class="desc2">ever wanted to send a virtual kiss? anonymously? well...now you can!</div>
     <br><br><br>
     <hr>
-    <img src="assets/images/f1f93a4b55f37ca7107db3ba5ac1144b.jpg" alt="virtual kiss illustration" class="kiss-image">
+    <img src="../assets/images/f1f93a4b55f37ca7107db3ba5ac1144b.jpg" alt="virtual kiss illustration" class="kiss-image">
     <button class="send-link" onclick="openModal()">(send a CHUU SURU NOW!)</button>
 </div>
 
@@ -260,6 +260,7 @@
             </div>
         </div>
 
+        <p class="modal-note">the recipient won't know who sent this — the email comes from the site's server.</p>
         <button class="modal-send" id="send-btn" onclick="sendKiss()">send now</button>
         <button class="modal-cancel" onclick="closeModal()">cancel</button>
     </div>
@@ -267,7 +268,8 @@
 
 <footer>
     <p>&copy; 2026 | Chuu Suru~ / Created by Settembre19th</p>
-     <a href="pages/contact.html">Contact</a>
+    <a href="pages/security-privacy.html">Security and Privacy</a>
+    <b>|</b> <a href="pages/contact.html">Contact</a>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
